@@ -1,8 +1,4 @@
-import org.ejml.data.Matrix
-import org.ejml.data.MatrixType
-import org.ejml.data.MatrixType.*
 import org.ejml.simple.SimpleMatrix
-import java.lang.IllegalArgumentException
 import java.math.RoundingMode
 
 class Lab1_1 {
@@ -38,8 +34,9 @@ class Lab1_1 {
         val result = SimpleMatrix(b.numRows(), 1)
         for (i in 0 until b.numRows()) {
             var tmp = b[i, 0]
-            for (j in 0 until i)  
-            result[i] = tmp / lower[i,i]
+            for (j in 0 until i)
+                tmp -= lower[i, j] * result[j, 0]
+            result[i] = tmp / lower[i, i]
         }
         return result
     }
