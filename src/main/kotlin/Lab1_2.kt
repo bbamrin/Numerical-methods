@@ -1,7 +1,7 @@
 import org.ejml.simple.SimpleMatrix
 import java.math.RoundingMode
 
-class Lab1_2 {
+class Lab1_2: MatrixPrinter() {
     fun triSolve(
         matrix: SimpleMatrix,
         vector: SimpleMatrix,
@@ -16,7 +16,8 @@ class Lab1_2 {
         val d = vector[i, 0]
         val p1: Double = -c / (b + a * p)
         val q1: Double = (d - a * q) / (b + a * p)
-        var x = 0.0
+        val x: Double
+
         if (i < matrix.numRows() - 1) {
             x = p1 * triSolve(matrix = matrix, vector = vector, solution = solution, p = p1, q = q1, i = i + 1) + q1
             solution[i, 0] = x
@@ -24,14 +25,5 @@ class Lab1_2 {
         }
         solution[i, 0] = q1
         return q1
-    }
-
-    fun printMatrixInt(matrix: SimpleMatrix) {
-
-        for (i in 0 until matrix.numRows()) {
-            for (j in 0 until matrix.numCols())
-                print("${matrix[i, j].toBigDecimal().setScale(2, RoundingMode.HALF_DOWN)} ")
-            println()
-        }
     }
 }

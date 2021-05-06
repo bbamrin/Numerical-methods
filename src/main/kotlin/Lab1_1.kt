@@ -1,7 +1,7 @@
 import org.ejml.simple.SimpleMatrix
 import java.math.RoundingMode
 
-class Lab1_1 {
+class Lab1_1: MatrixPrinter() {
     fun luDecomposition(matrix: SimpleMatrix): Pair<SimpleMatrix, SimpleMatrix> {
         if ((matrix.numCols() == matrix.numRows()).not())
             throw IllegalArgumentException()
@@ -59,14 +59,7 @@ class Lab1_1 {
         return backwardSubstitution(upper, y)
     }
 
-    fun printMatrixInt(matrix: SimpleMatrix) {
 
-        for (i in 0 until matrix.numRows()) {
-            for (j in 0 until matrix.numCols())
-                print("${matrix[i, j].toBigDecimal().setScale(2, RoundingMode.HALF_DOWN)} ")
-            println()
-        }
-    }
 
     fun luInverse(lower: SimpleMatrix, upper: SimpleMatrix): SimpleMatrix {
         if ((lower.numRows() != upper.numRows()) || (lower.numCols() != upper.numCols()) || (lower.numCols() != lower.numRows()))

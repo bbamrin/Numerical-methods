@@ -1,46 +1,13 @@
 import org.ejml.simple.SimpleMatrix
 import java.math.RoundingMode
 
-class Lab1_3 {
+class Lab1_3: MatrixPrinter() {
 
-    fun iterationSolve(matrix: SimpleMatrix, vector: SimpleMatrix, precision: Double): Pair<SimpleMatrix, Int> {
-        val abEqPair = getEquivalent(matrix, vector)
-        var itCount = 0
-        if (vectorNorm(abEqPair.second) <= precision)
-            return Pair(abEqPair.second, itCount)
-        var prevSolution = abEqPair.second
-        var currentSolution = SimpleMatrix(1, 1)
-        while (true) {
-            itCount++
-            currentSolution = iteration(abEqPair, prevSolution)
-            if (vectorNorm(currentSolution - prevSolution) <= precision)
-                return Pair(currentSolution, itCount)
-            prevSolution = currentSolution
-        }
+    private fun vectorNorm(vector: SimpleMatrix): Double {
+        var norm = 0.0
+        (0 until vector.numRows()).forEach { norm += vector[it, 0] * vector[it, 0] }
+        return Math.sqrt(norm)
     }
-
-
-    fun zeidelSolve(matrix: SimpleMatrix, vector: SimpleMatrix, precision: Double): Pair<SimpleMatrix, Int> {
-        val abEqPair = getZeidelEquivalent(matrix, vector)
-        var itCount = 0
-        if (vectorNorm(abEqPair.second) <= precision)
-            return Pair(abEqPair.second, itCount)
-        var prevSolution = abEqPair.second
-        var currentSolution = SimpleMatrix(1, 1)
-        while (true) {
-            itCount++
-            currentSolution = iteration(abEqPair, prevSolution)
-            if (vectorNorm(currentSolution - prevSolution) <= precision)
-                return Pair(currentSolution, itCount)
-            prevSolution = currentSolution
-        }
-    }
-
-    private fun iteration(
-        abEqPair: Pair<SimpleMatrix, SimpleMatrix>,
-        prevSolution: SimpleMatrix? = null
-    ): SimpleMatrix =
-        if (prevSolution != null) abEqPair.second + abEqPair.first.mult(prevSolution) else abEqPair.second
 
     private fun getEquivalent(matrix: SimpleMatrix, vector: SimpleMatrix): Pair<SimpleMatrix, SimpleMatrix> {
         val eqMatrix = SimpleMatrix(matrix.numRows(), matrix.numCols())
@@ -53,33 +20,57 @@ class Lab1_3 {
         return Pair(eqMatrix, eqVector)
     }
 
-    private fun getZeidelEquivalent(matrix: SimpleMatrix, vector: SimpleMatrix): Pair<SimpleMatrix, SimpleMatrix> {
-        val left = SimpleMatrix(matrix.numRows(), matrix.numCols())
-        val right = SimpleMatrix(matrix.numRows(), matrix.numCols())
+    private fun iteration(
+        abEqPair: Pair<SimpleMatrix, SimpleMatrix>,
+        prevSolution: SimpleMatrix
+    ): SimpleMatrix = abEqPair.second + abEqPair.first.mult(prevSolution)
+
+    fun iterationSolve(matrix: SimpleMatrix, vector: SimpleMatrix, precision: Double): Pair<SimpleMatrix, Int> {
         val abEqPair = getEquivalent(matrix, vector)
-        val identityMatrix = SimpleMatrix.identity(matrix.numRows())
+        var itCount = 0
+        if (vectorNorm(abEqPair.second) <= precision)
+            return Pair(abEqPair.second, itCount)
+        var prevSolution = abEqPair.second
+        var currentSolution: SimpleMatrix
+        while (true) {
+            itCount++
+            currentSolution = iteration(abEqPair, prevSolution)
+            if (vectorNorm(currentSolution - prevSolution) <= precision)
+                return Pair(currentSolution, itCount)
+            prevSolution = currentSolution
+        }
+    }
+
+    private fun zeidelIteration(
+        abEqPair: Pair<SimpleMatrix, SimpleMatrix>,
+        prevSolution: SimpleMatrix
+    ): SimpleMatrix {
+        val solution = SimpleMatrix(abEqPair.first.numRows(), 1)
+
         for (i in 0 until abEqPair.first.numRows()) {
-            for (j in 0 until abEqPair.first.numCols()) {
-                if (j < i) left[i, j] = abEqPair.first[i, j]
-                else right[i, j] = abEqPair.first[i, j]
+            solution[i, 0] += abEqPair.second[i, 0]
+            for (j in 0 until abEqPair.first.numRows()) {
+                solution[i, 0] +=
+                    abEqPair.first[i, j] * if (j >= i) prevSolution[j, 0] else solution[j, 0]
             }
         }
-        val tmp = (identityMatrix - left).invert()
-        return Pair(tmp.mult(right), tmp.mult(abEqPair.second))
+        return solution
     }
 
-    private fun vectorNorm(vector: SimpleMatrix): Double {
-        var norm = 0.0
-        (0 until vector.numRows()).forEach { norm += vector[it, 0] * vector[it, 0] }
-        return Math.sqrt(norm)
-    }
-
-    fun printMatrixInt(matrix: SimpleMatrix) {
-
-        for (i in 0 until matrix.numRows()) {
-            for (j in 0 until matrix.numCols())
-                print("${matrix[i, j].toBigDecimal().setScale(2, RoundingMode.HALF_DOWN)} ")
-            println()
+    fun zeidelSolve(matrix: SimpleMatrix, vector: SimpleMatrix, precision: Double): Pair<SimpleMatrix, Int> {
+        val abEqPair = getEquivalent(matrix, vector)
+        var itCount = 0
+        if (vectorNorm(abEqPair.second) <= precision)
+            return Pair(abEqPair.second, itCount)
+        var prevSolution = abEqPair.second
+        var currentSolution: SimpleMatrix
+        while (true) {
+            itCount++
+            currentSolution = zeidelIteration(abEqPair, prevSolution)
+            if (vectorNorm(currentSolution - prevSolution) <= precision)
+                return Pair(currentSolution, itCount)
+            prevSolution = currentSolution
         }
     }
+
 }
