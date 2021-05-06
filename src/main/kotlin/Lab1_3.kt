@@ -1,12 +1,13 @@
 import org.ejml.simple.SimpleMatrix
 import java.math.RoundingMode
+import kotlin.math.sqrt
 
 class Lab1_3: MatrixPrinter() {
 
     private fun vectorNorm(vector: SimpleMatrix): Double {
         var norm = 0.0
         (0 until vector.numRows()).forEach { norm += vector[it, 0] * vector[it, 0] }
-        return Math.sqrt(norm)
+        return sqrt(norm)
     }
 
     private fun getEquivalent(matrix: SimpleMatrix, vector: SimpleMatrix): Pair<SimpleMatrix, SimpleMatrix> {

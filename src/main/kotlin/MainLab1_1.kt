@@ -1,6 +1,6 @@
 import org.ejml.simple.SimpleMatrix
 
-class Main {
+class MainLab1_1 {
     companion object {
         @JvmStatic fun main(args: Array<String>) {
             val l1 = Lab1_1()
