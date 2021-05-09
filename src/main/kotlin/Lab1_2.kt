@@ -8,7 +8,7 @@ class Lab1_2: MatrixPrinter() {
         solution: SimpleMatrix,
         p: Double = 1.0,
         q: Double = 1.0,
-        i: Int
+        i: Int = 0
     ): Double {
         val a = if (i > 0) matrix[i, i - 1] else 0.0
         val b = matrix[i, i]

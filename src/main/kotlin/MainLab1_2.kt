@@ -29,7 +29,7 @@ class MainLab1_2 {
 
             val lab = Lab1_2()
             println("solution: ")
-            lab.triSolve(matrix = matrix, vector = vector, solution = solution, i = 0)
+            lab.triSolve(matrix = matrix, vector = vector, solution = solution)
             lab.printMatrixInt(solution)
             println("\ncheck: ")
             lab.printMatrixInt(matrix.mult(solution))
