@@ -63,4 +63,15 @@ class Lab1_5: MatrixPrinter() {
         return matrixA
     }
 
+    //a - матрица с собственными векторами
+    fun printEigenValues(a: SimpleMatrix) {
+        val j = 1
+        var d = a[j, j] * a[j, j] - 4 * (a[j, j]*a[j + 1, j + 1] - a[j, j + 1]* a[j + 1, j] )
+        val b = (a[j, j] + a[j + 1, j + 1])/2
+        d *= -1.0
+        println("lambda1: ${a[0,0]}")
+        println("lambda2: $b ${sqrt(d)/2}i")
+        println("lambda3: $b ${-sqrt(d)/2}i")
+    }
+
 }

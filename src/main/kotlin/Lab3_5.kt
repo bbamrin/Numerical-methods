@@ -2,11 +2,10 @@ import com.sun.marlin.DPathConsumer2D
 import kotlin.math.pow
 
 class Lab3_5 {
-//    fun squares
 
     private val interpolator = Lab3_1()
 
-    fun rectangleMethod( a: Double, b: Double, h: Double, f: (Double) -> Double): Double {
+    fun rectangleMethod(a: Double, b: Double, h: Double, f: (Double) -> Double): Double {
         var i = a + h
         var result = 0.0
         while (i <= b) {
@@ -17,7 +16,7 @@ class Lab3_5 {
         return result * h
     }
 
-    fun trapezoidalMethod( a: Double, b: Double, h: Double, f: (Double) -> Double): Double {
+    fun trapezoidalMethod(a: Double, b: Double, h: Double, f: (Double) -> Double): Double {
         var i = a + h
         var result = 0.0
         while (i <= b) {

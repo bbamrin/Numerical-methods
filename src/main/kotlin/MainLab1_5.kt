@@ -16,7 +16,7 @@ class MainLab1_5 {
             val qrPair = lab.getQRDecomposition(matrix)
 
             println("source matrix:")
-            lab.printMatrixInt(qrPair.first)
+            lab.printMatrixInt(matrix)
             println("\nmatrix Q:")
             lab.printMatrixInt(qrPair.first)
             println("\nmatrix R:")
@@ -29,6 +29,7 @@ class MainLab1_5 {
             lab.printMatrixInt(qrPair.first.transpose())
             println("\neigenvalues matrix:")
             lab.printMatrixInt(lab.getEigenvaluesMatrix(matrix, 0.01))
+            lab.printEigenValues(lab.getEigenvaluesMatrix(matrix, 0.01))
 
         }
     }

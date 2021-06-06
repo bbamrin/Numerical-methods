@@ -13,7 +13,7 @@ class MainLab1_4 {
             )
 
             val lab = Lab1_4()
-            val res = lab.rotationMethod(matrix, 0.3)
+            val res = lab.rotationMethod(matrix, 0.01)
             println("eigen values matrix: ")
             lab.printMatrixInt(res.first)
             println("\neigen vector matrix: ")

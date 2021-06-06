@@ -21,9 +21,9 @@ class MainLab3_5 {
             println("rectangle h = $h2: ${lab.rectangleMethod(x0, x1, h2, f1)}")
             println("trapezoidal h = $h2: ${ lab.trapezoidalMethod(x0, x1, h2, f1) }")
             println("Simpson h = $h2: ${ lab.simpsonMethod(x0, x1, h2, f1) }")
-            println("Runge-Romberg error: ${lab.rungeRombergMethod(lab::rectangleMethod, f1, x0, x1, h1, h2, 1)}")
-            println("Runge-Romberg error: ${lab.rungeRombergMethod(lab::trapezoidalMethod, f1, x0, x1, h1, h2, 2)}")
-            println("Runge-Romberg error: ${lab.rungeRombergMethod(lab::simpsonMethod, f1, x0, x1, h1, h2, 4)}")
+            println("Runge-Romberg rectangle Method error: ${lab.rungeRombergMethod(lab::rectangleMethod, f1, x0, x1, h1, h2, 1)}")
+            println("Runge-Romberg trapezoidal Method error: ${lab.rungeRombergMethod(lab::trapezoidalMethod, f1, x0, x1, h1, h2, 2)}")
+            println("Runge-Romberg simpson Method error: ${lab.rungeRombergMethod(lab::simpsonMethod, f1, x0, x1, h1, h2, 4)}")
 
         }
 
