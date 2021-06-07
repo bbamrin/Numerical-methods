@@ -1,18 +1,9 @@
 import javafx.application.Application
-import javafx.application.Platform
 import javafx.scene.Group
 import javafx.scene.Scene
 import javafx.scene.canvas.Canvas
-import javafx.scene.canvas.GraphicsContext
 import javafx.scene.paint.Color
-import javafx.scene.shape.ArcType
 import javafx.stage.Stage
-import org.apache.batik.css.engine.value.svg.BaselineShiftManager
-import tech.tablesaw.api.DoubleColumn
-import tech.tablesaw.api.Table
-import java.util.zip.DeflaterOutputStream
-import javax.xml.xpath.XPathNodes
-
 
 class MainLab3_3 {
     companion object {

@@ -1,5 +1,8 @@
 import org.ejml.simple.SimpleMatrix
-import kotlin.math.*
+import kotlin.math.abs
+import kotlin.math.exp
+import kotlin.math.pow
+import kotlin.math.roundToInt
 
 class Lab4_2: MatrixPrinter() {
 
@@ -58,11 +61,6 @@ class Lab4_2: MatrixPrinter() {
         return cauchySolver.rungeKuttaMethod(xRes, a, b, h, f, g, y0, n2, x0).first
     }
 
-    private fun getFinitiDifferenceMatrix() : SimpleMatrix {
-
-        return SimpleMatrix(1,1)
-    }
-
     fun finiteDifferenceMethod(
         a: Double,
         b: Double,
@@ -103,7 +101,6 @@ class Lab4_2: MatrixPrinter() {
         }
         x += h
         result.add(Pair(x, y1))
-        println(result)
         return result
     }
 }

@@ -13,12 +13,12 @@ class Lab3_1 {
         return result
     }
 
-    private fun dividedDifference(nodes: List<Pair<Double, Double>>): Double {
+    fun dividedDifference(nodes: List<Pair<Double, Double>>): Double {
         if (nodes.count() == 1)
             return nodes[0].second
         val subArgsList1 = nodes.subList(0, nodes.count() - 1)
         val subArgsList2 = nodes.subList(1, nodes.count())
-        return (dividedDifference(subArgsList1) - dividedDifference(subArgsList2))/
+        return (dividedDifference(subArgsList1) - dividedDifference(subArgsList2)) /
                 (nodes.first().first - nodes.last().first)
     }
 

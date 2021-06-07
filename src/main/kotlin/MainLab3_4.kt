@@ -1,5 +1,3 @@
-import javafx.application.Application
-
 class MainLab3_4 {
     companion object {
         @JvmStatic
@@ -14,7 +12,9 @@ class MainLab3_4 {
             )
             val x = 0.2
             println("first derivative: ${lab.firstDerivative(x, nodes)}")
+            println("first derivative1: ${lab.firstDerivative1(x, nodes)}")
             println("second derivative: ${lab.secondDerivative(x, nodes)}")
+            println("second derivative1: ${lab.secondDerivative1(x, nodes)}")
         }
 
     }

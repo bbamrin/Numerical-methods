@@ -28,9 +28,6 @@ dependencies {
     testImplementation(kotlin("test-js"))
 
     implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
-    implementation("org.jetbrains.lets-plot:lets-plot-batik:2.0.1")
-    implementation("tech.tablesaw:tablesaw-core:0.38.1")
-    implementation("tech.tablesaw:tablesaw-jsplot:0.38.1")
     api("org.jetbrains.lets-plot:lets-plot-common:2.0.1")
     api("org.jetbrains.lets-plot:lets-plot-kotlin-api:2.0.1")
     implementation("org.jetbrains.kotlinx:kotlinx-html:0.7.2")
